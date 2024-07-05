@@ -2,4 +2,11 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
+    //noinspection GradleDependency
+    id("com.google.devtools.ksp") version "1.9.24-1.0.20" apply false
+}
+buildscript {
+    dependencies {
+        classpath(libs.androidx.androidx.navigation.safeargs.gradle.plugin)
+    }
 }
