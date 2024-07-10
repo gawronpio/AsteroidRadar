@@ -9,21 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
-import com.example.asteroidradar.network_database.AsteroidDatabase
+import com.example.asteroidradar.network_database.database.AsteroidDatabase
 
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
-    private val application = requireNotNull(this.activity).application
-    private val dataSource = AsteroidDatabase.getInstance(application).asteroidDatabaseDao
+
+    private val application by lazy { requireNotNull(this.activity).application }
+    private val dataSource by lazy { AsteroidDatabase.getDatabase(application).asteroidDatabaseDao }
     private val viewModel: MainViewModel by viewModels {
         MainViewModel.Factory(dataSource, application)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
@@ -31,7 +26,10 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel
+
         return binding.root
     }
 }

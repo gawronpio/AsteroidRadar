@@ -4,11 +4,23 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.asteroidradar.network_database.AsteroidDatabaseDao
+import androidx.lifecycle.viewModelScope
+import com.example.asteroidradar.network_database.AsteroidRepository
+import com.example.asteroidradar.network_database.database.AsteroidDatabase.Companion.getDatabase
+import com.example.asteroidradar.network_database.database.AsteroidDatabaseDao
+import kotlinx.coroutines.launch
 
-class MainViewModel(database: AsteroidDatabaseDao, application: Application) : AndroidViewModel(application) {
-    // TODO: Implement the ViewModel
+class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) : AndroidViewModel(application) {
+    private val database = getDatabase(application)
+    private val asteroidRepository = AsteroidRepository(database)
 
+    val asteroids = asteroidRepository.asteroids
+
+    init {
+        viewModelScope.launch {
+            asteroidRepository.refreshAsteroids()
+        }
+    }
 
     class Factory(
         private val dataSource: AsteroidDatabaseDao,
