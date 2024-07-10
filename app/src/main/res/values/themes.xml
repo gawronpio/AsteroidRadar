@@ -2,8 +2,47 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AsteroidRadar" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/Primary</item>
+        <item name="colorOnPrimary">@color/OnPrimary</item>
+        <item name="colorPrimaryContainer">@color/PrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/OnPrimaryContainer</item>
+
+        <item name="colorSecondary">@color/Secondary</item>
+        <item name="colorOnSecondary">@color/OnSecondary</item>
+        <item name="colorSecondaryContainer">@color/SecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/OnSecondaryContainer</item>
+
+        <item name="colorError">@color/Error</item>
+        <item name="colorOnError">@color/OnError</item>
+        <item name="colorErrorContainer">@color/ErrorContainer</item>
+        <item name="colorOnErrorContainer">@color/OnErrorContainer</item>
+
+        <item name="colorSurface">@color/Surface</item>
+        <item name="colorSurfaceDim">@color/SurfaceDim</item>
+        <item name="colorSurfaceBright">@color/SurfaceBright</item>
+
+        <item name="colorOutline">@color/Outline</item>
+        <item name="colorOutlineVariant">@color/OutlineVariant</item>
+
+        <item name="android:textColor">@color/OnPrimary</item>
+
     </style>
 
     <style name="Theme.AsteroidRadar" parent="Base.Theme.AsteroidRadar" />
+
+    <style name="text_over_image" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:paddingStart">@dimen/padding_normal</item>
+        <item name="android:paddingEnd">@dimen/padding_normal</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+
+        <item name="android:background">@color/BackgroundAlfa</item>
+        <item name="android:textColor">@color/Outline</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="list_entry" parent="TextAppearance.Material3.BodyMedium">
+<!--        <item name="android:paddingTop">@dimen/padding_small</item>-->
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
+    </style>
 </resources>
