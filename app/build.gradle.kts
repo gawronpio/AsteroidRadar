@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.squareup.moshi.moshikotlin)
     implementation(libs.bumptech.glide)
     implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.timber)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
