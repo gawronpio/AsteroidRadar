@@ -1,9 +1,9 @@
 package com.example.asteroidradar.network_database.network
 
-import com.example.asteroidradar.dateString2Millis
 import com.example.asteroidradar.network_database.database.AsteroidData
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import timber.log.Timber
 
 @JsonClass(generateAdapter = true)
 data class NeoFeed(
@@ -22,8 +22,8 @@ data class Links(
 @JsonClass(generateAdapter = true)
 data class NearEarthObject(
     @Json(name = "links") val links: NeoLinks,
-    @Json(name = "id") val id: String,
-    @Json(name = "neo_reference_id") val neoReferenceId: String,
+    @Json(name = "id") val id: Long,
+    @Json(name = "neo_reference_id") val neoReferenceId: Long,
     @Json(name = "name") val name: String,
     @Json(name = "nasa_jpl_url") val nasaJplUrl: String,
     @Json(name = "absolute_magnitude_h") val absoluteMagnitudeH: Double,
@@ -64,28 +64,31 @@ data class CloseApproachData(
 
 @JsonClass(generateAdapter = true)
 data class RelativeVelocity(
-    @Json(name = "kilometers_per_second") val kilometersPerSecond: String,
-    @Json(name = "kilometers_per_hour") val kilometersPerHour: String,
-    @Json(name = "miles_per_hour") val milesPerHour: String
+    @Json(name = "kilometers_per_second") val kilometersPerSecond: Double,
+    @Json(name = "kilometers_per_hour") val kilometersPerHour: Double,
+    @Json(name = "miles_per_hour") val milesPerHour: Double
 )
 
 @JsonClass(generateAdapter = true)
 data class MissDistance(
-    @Json(name = "astronomical") val astronomical: String,
-    @Json(name = "lunar") val lunar: String,
-    @Json(name = "kilometers") val kilometers: String,
-    @Json(name = "miles") val miles: String
+    @Json(name = "astronomical") val astronomical: Double,
+    @Json(name = "lunar") val lunar: Double,
+    @Json(name = "kilometers") val kilometers: Double,
+    @Json(name = "miles") val miles: Double
 )
 
 fun NeoFeed.asteroidsDataList(): Array<AsteroidData> =
     nearEarthObjects.values.flatten().map { asteroid ->
         val approachData = asteroid.closeApproachData.first()
+        Timber.d("Approach data: $approachData")
         AsteroidData(
-            id = asteroid.id.toLong(),
-            date = dateString2Millis(approachData.closeApproachDateFull),
-            maxMagnitude = asteroid.absoluteMagnitudeH.toLong(),
-            diameter = asteroid.estimatedDiameter.kilometers.estimatedDiameterMax.toLong(),
-            velocity = approachData.relativeVelocity.kilometersPerSecond.toLong(),
-            distance = approachData.missDistance.astronomical.toLong()
+            id = asteroid.id,
+            name = asteroid.name,
+            date = approachData.epochDateCloseApproach,
+            maxMagnitude = asteroid.absoluteMagnitudeH,
+            diameter = asteroid.estimatedDiameter.kilometers.estimatedDiameterMax,
+            velocity = approachData.relativeVelocity.kilometersPerSecond,
+            distance = approachData.missDistance.astronomical,
+            hazardous = asteroid.isPotentiallyHazardousAsteroid
         )
     }.toTypedArray()

@@ -2,23 +2,54 @@ package com.example.asteroidradar.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.asteroidradar.network_database.AsteroidRepository
 import com.example.asteroidradar.network_database.database.AsteroidDatabase.Companion.getDatabase
 import com.example.asteroidradar.network_database.database.AsteroidDatabaseDao
+import com.example.asteroidradar.network_database.network.NetworkApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
     private val asteroidRepository = AsteroidRepository(database)
 
+    private var _apodUrl = MutableLiveData<String>()
+    val apodUrl: LiveData<String>
+        get() = _apodUrl
+    private var _missingApod = MutableLiveData(false)
+    val missingApod: LiveData<Boolean>
+        get() = _missingApod
+
+//    lateinit var picture_of_the_day:
     val asteroids = asteroidRepository.asteroids
 
     init {
         viewModelScope.launch {
+            getNewPicOfTheDayUrl()
             asteroidRepository.refreshAsteroids()
+        }
+    }
+
+    private suspend fun getNewPicOfTheDayUrl() {
+        try {
+            val result = withContext(Dispatchers.IO) {
+                NetworkApi.retrofitService.getApod()
+            }
+            if(result.mediaType == "image") {
+                _apodUrl.postValue(result.url)
+            } else {
+                _missingApod.postValue(true)
+            }
+        } catch(e: Exception) {
+            Timber.e(e.message)
+            _missingApod.postValue(true)
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
 import com.example.asteroidradar.network_database.database.AsteroidDatabase
@@ -28,8 +29,24 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel
+        viewModel.apodUrl.observe(viewLifecycleOwner) { url ->
+            loadPicture(url)
+        }
+        viewModel.missingApod.observe(viewLifecycleOwner) { missing ->
+            if(missing) {
+                binding.imageOfTheDay.setImageResource(R.drawable.baseline_broken_image_24)
+            }
+        }
 
         return binding.root
+    }
+
+    private fun loadPicture(url: String) {
+        val imageView = binding.imageOfTheDay
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.placeholder_picture_of_day)
+            .error(R.drawable.baseline_broken_image_24)
+            .into(imageView)
     }
 }

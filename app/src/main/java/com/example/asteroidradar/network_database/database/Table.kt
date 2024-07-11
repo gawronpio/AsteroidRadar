@@ -9,37 +9,47 @@ data class AsteroidData(
     @PrimaryKey(autoGenerate = false)
     var id: Long = 0L,
 
+    @ColumnInfo(name = "name")
+    val name: String = "",
+
     @ColumnInfo(name = "close_approach_date")
     val date: Long = 0L,
 
     @ColumnInfo(name = "absolute_magnitude")
-    var maxMagnitude: Long = 0L,
+    var maxMagnitude: Double = 0.0,
 
     @ColumnInfo(name = "estimated_diameter")
-    var diameter: Long = 0L,
+    var diameter: Double = 0.0,
 
     @ColumnInfo(name = "relative_velocity")
-    var velocity: Long = 0L,
+    var velocity: Double = 0.0,
 
     @ColumnInfo(name = "distance_from_earth")
-    var distance: Long = 0L
+    var distance: Double = 0.0,
+
+    @ColumnInfo(name = "is_potentially_hazardous")
+    var hazardous: Boolean = false
 )
 
 data class Asteroid(val id: Long,
+                    val name: String,
                     val date: Long,
-                    val maxMagnitude: Long,
-                    val diameter: Long,
-                    val velocity: Long,
-                    val distance: Long)
+                    val maxMagnitude: Double,
+                    val diameter: Double,
+                    val velocity: Double,
+                    val distance: Double,
+                    val hazardous: Boolean)
 
 fun List<AsteroidData>.asDomainModel(): List<Asteroid> {
     return map {
         Asteroid(
             id = it.id,
+            name = it.name,
             date = it.date,
             maxMagnitude = it.maxMagnitude,
             diameter = it.diameter,
             velocity = it.velocity,
-            distance = it.distance)
+            distance = it.distance,
+            hazardous = it.hazardous)
     }
 }

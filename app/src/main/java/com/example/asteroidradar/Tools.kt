@@ -9,8 +9,3 @@ fun dateMillis2String(timeMillis: Long): String {
     val date = Date(timeMillis)
     return format.format(date)
 }
-
-fun dateString2Millis(dateString: String): Long {
-    val format = SimpleDateFormat("yyyy-MMM-dd HH:mm", Locale.ENGLISH)
-    return format.parse(dateString)?.time ?: 0L
-}

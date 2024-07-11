@@ -1,0 +1,76 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "bec8a8d03336961bfd728a0160642f95",
+    "entities": [
+      {
+        "tableName": "asteroid_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `close_approach_date` INTEGER NOT NULL, `absolute_magnitude` REAL NOT NULL, `estimated_diameter` REAL NOT NULL, `relative_velocity` REAL NOT NULL, `distance_from_earth` REAL NOT NULL, `is_potentially_hazardous` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "close_approach_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxMagnitude",
+            "columnName": "absolute_magnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "diameter",
+            "columnName": "estimated_diameter",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "velocity",
+            "columnName": "relative_velocity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distance",
+            "columnName": "distance_from_earth",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hazardous",
+            "columnName": "is_potentially_hazardous",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bec8a8d03336961bfd728a0160642f95')"
+    ]
+  }
+}

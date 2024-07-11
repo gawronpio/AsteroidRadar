@@ -2,7 +2,6 @@ package com.example.asteroidradar.network_database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.asteroidradar.Secret.API_KEY
 import com.example.asteroidradar.network_database.database.Asteroid
 import com.example.asteroidradar.network_database.database.AsteroidDatabase
 import com.example.asteroidradar.network_database.database.asDomainModel
@@ -35,10 +34,8 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
                 val asteroidsData = NetworkApi.retrofitService.getFeed(
                     dateMillis2String(System.currentTimeMillis()),
                     dateMillis2String(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000), // Add 7 days
-                    API_KEY
-                ).await()
+                )
                 database.asteroidDatabaseDao.insertAll(*asteroidsData.asteroidsDataList())
-                database.asteroidDatabaseDao.deleteOld()
             } catch(e: Exception) {
                 Timber.e(e.message)
                 // TODO: Dodać akcje w przypadku nieudanego pobrania danych?

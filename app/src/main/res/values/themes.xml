@@ -24,6 +24,8 @@
         <item name="colorOutline">@color/Outline</item>
         <item name="colorOutlineVariant">@color/OutlineVariant</item>
 
+        <item name="android:windowBackground">@color/Background</item>
+
         <item name="android:textColor">@color/OnPrimary</item>
 
     </style>
