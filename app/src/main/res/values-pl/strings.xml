@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Asteroid Radar</string>
+    <string name="image_of_the_day">Zdjęcie dnia</string>
+    <string name="close_approach_date">Data zbliżenia</string>
+    <string name="absolute_magnitude">Jasność absolutna</string>
+    <string name="estimated_diameter">Szacowana średnica</string>
+    <string name="relative_velocity">Prędkość względna</string>
+    <string name="distance_from_earth">Odległość od Ziemi</string>
+
+    <string name="au_unit">%.6f au</string>
+    <string name="km_unit">%.6f km</string>
+    <string name="kmps_unit">%.6f km/s</string>
+
+    <string name="hazardous_desc">Asteroida może być niebezpieczna</string>
+    <string name="not_hazardous_desc">Asteroida nie jest niebezpieczna</string>
+</resources>
