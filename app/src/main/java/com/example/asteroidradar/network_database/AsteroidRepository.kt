@@ -42,4 +42,10 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
             }
         }
     }
+
+    suspend fun deleteOldAsteroids() {
+        withContext(Dispatchers.IO) {
+            database.asteroidDatabaseDao.deleteOld()
+        }
+    }
 }
