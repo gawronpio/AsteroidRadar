@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
@@ -35,6 +37,25 @@ class MainFragment : Fragment() {
         viewModel.missingApod.observe(viewLifecycleOwner) { missing ->
             if(missing) {
                 binding.imageOfTheDay.setImageResource(R.drawable.baseline_broken_image_24)
+            }
+        }
+
+        val manager = LinearLayoutManager(activity)
+        binding.asteroidRecycler.layoutManager = manager
+        val adapter = AsteroidRecyclerAdapter(AsteroidRecyclerListener {
+            asteroidId -> viewModel.onAsteroidClicked(asteroidId)
+        })
+        binding.asteroidRecycler.adapter = adapter
+
+        viewModel.navigateToAsteroidDetail.observe(viewLifecycleOwner) { asteroidId ->
+            asteroidId?.let {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(asteroidId))
+                viewModel.onAsteroidDetailNavigated()
+            }
+        }
+        viewModel.asteroidsData.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.addAndSubmitList(it)
             }
         }
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.asteroidradar.network_database.AsteroidRepository
+import com.example.asteroidradar.network_database.database.AsteroidData
 import com.example.asteroidradar.network_database.database.AsteroidDatabase.Companion.getDatabase
 import com.example.asteroidradar.network_database.database.AsteroidDatabaseDao
 import com.example.asteroidradar.network_database.network.NetworkApi
@@ -26,14 +27,20 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
     private var _missingApod = MutableLiveData(false)
     val missingApod: LiveData<Boolean>
         get() = _missingApod
+    private var _navigateToAsteroidDetail = MutableLiveData<Long?>()
+    val navigateToAsteroidDetail: LiveData<Long?>
+        get() = _navigateToAsteroidDetail
 
-//    lateinit var picture_of_the_day:
     val asteroids = asteroidRepository.asteroids
+    private var _asteroidsData = MutableLiveData<List<AsteroidData>>()
+    val asteroidsData: LiveData<List<AsteroidData>>
+        get() = _asteroidsData
 
     init {
         viewModelScope.launch {
             getNewPicOfTheDayUrl()
             asteroidRepository.refreshAsteroids()
+            _asteroidsData.postValue(databaseDao.getAll())
         }
     }
 
@@ -51,6 +58,14 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
             Timber.e(e.message)
             _missingApod.postValue(true)
         }
+    }
+
+    fun onAsteroidClicked(id: Long) {
+        _navigateToAsteroidDetail.value = id
+    }
+
+    fun onAsteroidDetailNavigated() {
+        _navigateToAsteroidDetail.value = null
     }
 
     class Factory(

@@ -3,30 +3,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="Primary">#2196F3</color>
-    <color name="OnPrimary">#001E35</color>
-    <color name="PrimaryContainer">#0E69C3</color>
-    <color name="OnPrimaryContainer">#BBDEFB</color>
+    <color name="Primary">#000000</color>
+    <color name="OnPrimary">#FFFFFF</color>
+    <color name="PrimaryContainer">#000000</color>
+    <color name="OnPrimaryContainer">#FFFFFF</color>
 
-    <color name="Secondary">#FFA000</color>
-    <color name="OnSecondary">#432A00</color>
-    <color name="SecondaryContainer">#F57C00</color>
-    <color name="OnSecondaryContainer">#FFE0B2</color>
-
-    <color name="Error">#C82F00</color>
-    <color name="OnError">#000000</color>
-    <color name="ErrorContainer">#EB6363</color>
-    <color name="OnErrorContainer">#FFFFFF</color>
-
-    <color name="Surface">#CAD5E0</color>
-    <color name="SurfaceDim">#A7C3E0</color>
-    <color name="SurfaceBright">#DBDBDB</color>
-
-    <color name="Outline">#002C57</color>
-    <color name="OutlineVariant">#D5EAFF</color>
-
-    <color name="Background">#001326</color>
+    <color name="Background">#000000</color>
     <color name="BackgroundAlfa">#8099BADB</color>
 
     <color name="potentially_hazardous">#FF8282</color>
+
+    <color name="Text">@color/OnPrimary</color>
+    <color name="TextSecondary">#6EA0D2</color>
 </resources>

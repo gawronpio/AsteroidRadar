@@ -7,23 +7,6 @@
         <item name="colorPrimaryContainer">@color/PrimaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/OnPrimaryContainer</item>
 
-        <item name="colorSecondary">@color/Secondary</item>
-        <item name="colorOnSecondary">@color/OnSecondary</item>
-        <item name="colorSecondaryContainer">@color/SecondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/OnSecondaryContainer</item>
-
-        <item name="colorError">@color/Error</item>
-        <item name="colorOnError">@color/OnError</item>
-        <item name="colorErrorContainer">@color/ErrorContainer</item>
-        <item name="colorOnErrorContainer">@color/OnErrorContainer</item>
-
-        <item name="colorSurface">@color/Surface</item>
-        <item name="colorSurfaceDim">@color/SurfaceDim</item>
-        <item name="colorSurfaceBright">@color/SurfaceBright</item>
-
-        <item name="colorOutline">@color/Outline</item>
-        <item name="colorOutlineVariant">@color/OutlineVariant</item>
-
         <item name="android:windowBackground">@color/Background</item>
 
         <item name="android:textColor">@color/OnPrimary</item>
@@ -32,19 +15,32 @@
 
     <style name="Theme.AsteroidRadar" parent="Base.Theme.AsteroidRadar" />
 
-    <style name="text_over_image" parent="TextAppearance.Material3.BodyMedium">
+    <style name="text_base" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:background">@color/Background</item>
+        <item name="android:textColor">@color/Text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="text_over_image" parent="text_base">
         <item name="android:paddingStart">@dimen/padding_normal</item>
         <item name="android:paddingEnd">@dimen/padding_normal</item>
         <item name="android:paddingTop">@dimen/padding_small</item>
         <item name="android:paddingBottom">@dimen/padding_small</item>
 
-        <item name="android:background">@color/BackgroundAlfa</item>
-        <item name="android:textColor">@color/Outline</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/TextSecondary</item>
     </style>
 
-    <style name="list_entry" parent="TextAppearance.Material3.BodyMedium">
-<!--        <item name="android:paddingTop">@dimen/padding_small</item>-->
+    <style name="list_entry" parent="text_base">
         <item name="android:paddingBottom">@dimen/padding_normal</item>
+    </style>
+    
+    <style name="asteroid_element" parent="text_base">
+    </style>
+
+    <style name="asteroid_headline" parent="asteroid_element">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="detail_text" parent="text_base">
     </style>
 </resources>

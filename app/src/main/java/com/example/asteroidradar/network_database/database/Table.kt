@@ -1,8 +1,10 @@
 package com.example.asteroidradar.network_database.database
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "asteroid_table")
 data class AsteroidData(
@@ -31,6 +33,7 @@ data class AsteroidData(
     var hazardous: Boolean = false
 )
 
+@Parcelize
 data class Asteroid(val id: Long,
                     val name: String,
                     val date: Long,
@@ -38,7 +41,7 @@ data class Asteroid(val id: Long,
                     val diameter: Double,
                     val velocity: Double,
                     val distance: Double,
-                    val hazardous: Boolean)
+                    val hazardous: Boolean): Parcelable
 
 fun List<AsteroidData>.asDomainModel(): List<Asteroid> {
     return map {
