@@ -54,12 +54,22 @@ fun TextView.setDistanceFromEarth(item: AsteroidData?) {
     }
 }
 
-@BindingAdapter("hazardousImage")
-fun ImageView.setHazardousImage(item: AsteroidData?) {
+@BindingAdapter("hazardousIcon")
+fun ImageView.setHazardousIcon(item: AsteroidData?) {
     item?.let {
         setImageResource(when(item.hazardous) {
             true -> R.drawable.ic_status_potentially_hazardous
             else -> R.drawable.ic_status_normal
+        })
+    }
+}
+
+@BindingAdapter("hazardousImage")
+fun ImageView.setHazardousImage(item: AsteroidData?) {
+    item?.let {
+        setImageResource(when(item.hazardous) {
+            true -> R.drawable.asteroid_hazardous
+            else -> R.drawable.asteroid_safe
         })
     }
 }
