@@ -9,10 +9,10 @@
     <color name="OnPrimaryContainer">#FFFFFF</color>
 
     <color name="Background">#000000</color>
-    <color name="BackgroundAlfa">#8099BADB</color>
+    <color name="BackgroundAlfa">#4D000000</color>
 
     <color name="potentially_hazardous">#FF8282</color>
 
     <color name="Text">@color/OnPrimary</color>
-    <color name="TextSecondary">#6EA0D2</color>
+    <color name="TextSecondary">@color/OnPrimary</color>
 </resources>
