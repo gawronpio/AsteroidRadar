@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.MainFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.asteroidradar.ui.main.MainViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,7 +23,8 @@
             android:src="@drawable/placeholder_picture_of_day"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:apodTitle="@{viewModel.apodTitle}"/>
 
         <TextView
             android:id="@+id/textView"

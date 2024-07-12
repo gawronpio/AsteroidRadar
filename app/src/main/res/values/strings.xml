@@ -12,4 +12,7 @@
     <string name="au_unit">%.6f au</string>
     <string name="km_unit">%.6f km</string>
     <string name="kmps_unit">%.6f km/s</string>
+
+    <string name="hazardous_desc">Asteroid is hazardous</string>
+    <string name="not_hazardous_desc">Asteroid is not hazardous</string>
 </resources>

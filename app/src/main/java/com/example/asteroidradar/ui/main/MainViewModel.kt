@@ -24,6 +24,9 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
     private var _apodUrl = MutableLiveData<String>()
     val apodUrl: LiveData<String>
         get() = _apodUrl
+    private var _apodTitle = MutableLiveData<String>()
+    val apodTitle: LiveData<String>
+        get() = _apodTitle
     private var _missingApod = MutableLiveData(false)
     val missingApod: LiveData<Boolean>
         get() = _missingApod
@@ -51,6 +54,7 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
             }
             if(result.mediaType == "image") {
                 _apodUrl.postValue(result.url)
+                _apodTitle.postValue(result.explanation)
             } else {
                 _missingApod.postValue(true)
             }

@@ -61,6 +61,10 @@ fun ImageView.setHazardousIcon(item: AsteroidData?) {
             true -> R.drawable.ic_status_potentially_hazardous
             else -> R.drawable.ic_status_normal
         })
+        contentDescription = when(item.hazardous) {
+            true -> context.getString(R.string.hazardous_desc)
+            else -> context.getString(R.string.not_hazardous_desc)
+        }
     }
 }
 
@@ -71,5 +75,26 @@ fun ImageView.setHazardousImage(item: AsteroidData?) {
             true -> R.drawable.asteroid_hazardous
             else -> R.drawable.asteroid_safe
         })
+    }
+}
+
+@BindingAdapter("apodTitle")
+fun ImageView.setApodTitle(item: String?) {
+    item?.let {
+        contentDescription = if (item != "") {
+            item
+        } else {
+            context.getString(R.string.image_of_the_day)
+        }
+    }
+}
+
+@BindingAdapter("hazardousContentDescription")
+fun ImageView.setHazardousContentDescription(item: AsteroidData?) {
+    item?.let {
+        contentDescription = when(item.hazardous) {
+            true -> context.getString(R.string.hazardous_desc)
+            else -> context.getString(R.string.not_hazardous_desc)
+        }
     }
 }
