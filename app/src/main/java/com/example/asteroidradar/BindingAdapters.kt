@@ -1,5 +1,6 @@
 package com.example.asteroidradar
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.asteroidradar.network_database.database.AsteroidData
@@ -15,5 +16,50 @@ fun TextView.setAsteroidName(item: AsteroidData?) {
 fun TextView.setAsteroidDate(item: AsteroidData?) {
     item?.let {
         text = dateMillis2String(item.date)
+    }
+}
+
+@BindingAdapter("closeApproachDate")
+fun TextView.setCloseApproachDate(item: AsteroidData?) {
+    item?.let {
+        text = dateMillis2String(item.date)
+    }
+}
+
+@BindingAdapter("absoluteMagnitude")
+fun TextView.setAbsoluteMagnitude(item: AsteroidData?) {
+    item?.let {
+        text = context.resources.getString(R.string.au_unit, item.maxMagnitude)
+    }
+}
+
+@BindingAdapter("estimatedDiameter")
+fun TextView.setEstimatedDiameter(item: AsteroidData?) {
+    item?.let {
+        text = context.resources.getString(R.string.km_unit, item.diameter)
+    }
+}
+
+@BindingAdapter("relativeVelocity")
+fun TextView.setRelativeVelocity(item: AsteroidData?) {
+    item?.let {
+        text = context.resources.getString(R.string.kmps_unit, item.velocity)
+    }
+}
+
+@BindingAdapter("distanceFromEarth")
+fun TextView.setDistanceFromEarth(item: AsteroidData?) {
+    item?.let {
+        text = context.resources.getString(R.string.au_unit, item.distance)
+    }
+}
+
+@BindingAdapter("hazardousImage")
+fun ImageView.setHazardousImage(item: AsteroidData?) {
+    item?.let {
+        setImageResource(when(item.hazardous) {
+            true -> R.drawable.ic_status_potentially_hazardous
+            else -> R.drawable.ic_status_normal
+        })
     }
 }

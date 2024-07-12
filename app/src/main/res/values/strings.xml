@@ -8,4 +8,8 @@
     <string name="estimated_diameter">Estimated diameter</string>
     <string name="relative_velocity">Relative velocity</string>
     <string name="distance_from_earth">Distance from earth</string>
+
+    <string name="au_unit">%.6f au</string>
+    <string name="km_unit">%.6f km</string>
+    <string name="kmps_unit">%.6f km/s</string>
 </resources>
