@@ -51,6 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_help_circle" />
+            app:srcCompat="@drawable/ic_help_circle"
+            app:hazardousImage="@{asteroidData}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
