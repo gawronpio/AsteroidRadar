@@ -18,7 +18,7 @@
     <style name="text_base" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:background">@color/Background</item>
         <item name="android:textColor">@color/Text</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
     <style name="text_over_image" parent="text_base">
@@ -29,6 +29,7 @@
 
         <item name="android:background">@color/BackgroundAlfa</item>
         <item name="android:textColor">@color/TextSecondary</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="list_entry" parent="text_base">
