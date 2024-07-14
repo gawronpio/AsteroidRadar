@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Asteroid Radar</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis eros lacus. Suspendisse sit amet leo dolor. Integer imperdiet, velit vel bibendum maximus, turpis nibh.</string>
     <string name="image_of_the_day">Zdjęcie dnia</string>
     <string name="close_approach_date">Data zbliżenia</string>
     <string name="absolute_magnitude">Jasność absolutna</string>
     <string name="estimated_diameter">Szacowana średnica</string>
     <string name="relative_velocity">Prędkość względna</string>
     <string name="distance_from_earth">Odległość od Ziemi</string>
+    <string name="au_explanation">Jednostka astronomiczna (au) jest jednostką długości. W przybliżeniu jest to dystans między Ziemią, a Słońcem równy około 150 milionom kilometrów (93 miliony mil).</string>
+    <string name="ok">Ok</string>
 
     <string name="au_unit">%.6f au</string>
     <string name="km_unit">%.6f km</string>

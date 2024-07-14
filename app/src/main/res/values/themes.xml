@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.AsteroidRadar" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -43,5 +43,18 @@
     </style>
 
     <style name="detail_text" parent="text_base">
+    </style>
+
+    <style name="help_dialog" parent="text_base">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:background">@color/InfoDialogBackground</item>
+        <item name="android:textColor">@color/InfoDialogText</item>
+    </style>
+    <style name="help_dialog_button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="colorAccent">@color/InfoDialogButton</item>
+        <item name="android:textColor">@color/InfoDialogButtonTextColor</item>
+        <item name="backgroundTint">@color/InfoDialogBackground</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

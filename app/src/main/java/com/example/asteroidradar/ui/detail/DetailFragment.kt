@@ -1,10 +1,14 @@
 package com.example.asteroidradar.ui.detail
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.asteroidradar.R
@@ -29,6 +33,27 @@ class DetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.showHelp.observe(viewLifecycleOwner) { showHelp ->
+            if(showHelp) {
+                showHelpDialog(requireContext())
+                viewModel.onHelpShown()
+            }
+        }
+
         return binding.root
+    }
+
+    private fun showHelpDialog(context: Context) {
+        val builder = AlertDialog.Builder(context)
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val dialogView = inflater.inflate(R.layout.help_dialog, null)
+        val infoTextView = dialogView.findViewById<TextView>(R.id.helpTextView)
+        infoTextView.text = getString(R.string.au_explanation)
+        val acceptButton = dialogView.findViewById<Button>(R.id.acceptButton)
+        val dialog = builder.setView(dialogView).create()
+        acceptButton.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 }

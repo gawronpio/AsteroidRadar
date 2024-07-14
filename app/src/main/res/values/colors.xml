@@ -15,4 +15,9 @@
 
     <color name="Text">@color/OnPrimary</color>
     <color name="TextSecondary">@color/OnPrimary</color>
+
+    <color name="InfoDialogBackground">@color/white</color>
+    <color name="InfoDialogText">@color/black</color>
+    <color name="InfoDialogButton">@color/white</color>
+    <color name="InfoDialogButtonTextColor">#C24646</color>
 </resources>

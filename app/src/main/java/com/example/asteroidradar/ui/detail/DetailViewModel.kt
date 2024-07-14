@@ -21,6 +21,9 @@ class DetailViewModel(
     private val _asteroidData = MutableLiveData<AsteroidData?>()
     val asteroidData: LiveData<AsteroidData?>
         get() = _asteroidData
+    private val _showHelp = MutableLiveData(false)
+    val showHelp: LiveData<Boolean>
+        get() = _showHelp
 
     init {
         viewModelScope.launch {
@@ -29,6 +32,14 @@ class DetailViewModel(
             }
             _asteroidData.postValue(result)
         }
+    }
+
+    fun onHelpClicked() {
+        _showHelp.value = true
+    }
+
+    fun onHelpShown() {
+        _showHelp.value = false
     }
 }
 
