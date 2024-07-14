@@ -10,14 +10,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.asteroidradar.network_database.AsteroidRepository
 import com.example.asteroidradar.network_database.database.AsteroidData
 import com.example.asteroidradar.network_database.database.AsteroidDatabase.Companion.getDatabase
-import com.example.asteroidradar.network_database.database.AsteroidDatabaseDao
 import com.example.asteroidradar.network_database.network.NetworkApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
     private val asteroidRepository = AsteroidRepository(database)
 
@@ -43,16 +42,37 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
 
     init {
         viewModelScope.launch {
-            getNewPicOfTheDayUrl()
             if(asteroidRepository.refreshAsteroids()) {
                 _httpError.value = true
             }
-            _asteroidsData.postValue(databaseDao.getAll())
+            showNext7Days()
+            getNewPicOfTheDayUrl()
         }
     }
 
     fun onHttpErrorRead() {
         _httpError.value = false
+    }
+
+    fun showNext7Days() {
+        viewModelScope.launch {
+            val startTime = System.currentTimeMillis()
+            val endTime = startTime + 7 * 24 * 60 * 60 * 1000
+            _asteroidsData.postValue(database.asteroidDatabaseDao.getPeriod(startTime, endTime))
+        }
+    }
+
+    fun showToday() {
+        viewModelScope.launch {
+            val startTime = System.currentTimeMillis()
+            _asteroidsData.postValue(database.asteroidDatabaseDao.getPeriod(startTime, startTime))
+        }
+    }
+
+    fun showAll() {
+        viewModelScope.launch {
+            _asteroidsData.postValue(database.asteroidDatabaseDao.getAll())
+        }
     }
 
     private suspend fun getNewPicOfTheDayUrl() {
@@ -83,13 +103,12 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
     }
 
     class Factory(
-        private val dataSource: AsteroidDatabaseDao,
         private val application: Application
     ) : ViewModelProvider.Factory {
         @Suppress("unchecked_cast")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                return MainViewModel(dataSource, application) as T
+                return MainViewModel(application) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

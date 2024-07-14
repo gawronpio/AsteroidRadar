@@ -20,4 +20,7 @@
     <string name="hazardous_status">Hazardous status</string>
     <string name="hazardous_desc">Asteroid is hazardous</string>
     <string name="not_hazardous_desc">Asteroid is not hazardous</string>
+    <string name="next_7_days">next 7 days</string>
+    <string name="today">today</string>
+    <string name="all_asteroids">all asteroids</string>
 </resources>

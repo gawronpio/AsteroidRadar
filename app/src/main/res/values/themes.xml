@@ -11,6 +11,8 @@
 
         <item name="android:textColor">@color/OnPrimary</item>
 
+        <item name="popupMenuStyle">@style/filter_menu</item>
+
     </style>
 
     <style name="Theme.AsteroidRadar" parent="Base.Theme.AsteroidRadar" />
@@ -54,5 +56,10 @@
         <item name="android:textColor">@color/InfoDialogButtonTextColor</item>
         <item name="backgroundTint">@color/InfoDialogBackground</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="filter_menu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:background">@color/Background</item>
+        <item name="android:textColor">@color/Text</item>
     </style>
 </resources>

@@ -20,4 +20,7 @@
     <string name="not_hazardous_desc">Asteroida nie jest niebezpieczna</string>
     <string name="au_unit_help_button">Przycisk z wyjaśnieniem jednostki au</string>
     <string name="internet_not_ok">Wystąpił problem z połączeniem sieciowym</string>
+    <string name="next_7_days">najbliższe 7 dni</string>
+    <string name="today">dzisiaj</string>
+    <string name="all_asteroids">wszystkie asteroidy</string>
 </resources>

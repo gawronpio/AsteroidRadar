@@ -12,9 +12,12 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     suspend fun refreshAsteroids(): Boolean {
         withContext(Dispatchers.IO) {
             try {
+                val startTime = dateMillis2String(System.currentTimeMillis())
+                val endTime = dateMillis2String(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000) // Add 7 days
+                Timber.d("Start time: $startTime, End time: $endTime")
                 val asteroidsData = NetworkApi.retrofitService.getFeed(
-                    dateMillis2String(System.currentTimeMillis()),
-                    dateMillis2String(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000), // Add 7 days
+                    startTime,
+                    endTime,
                 )
                 database.asteroidDatabaseDao.insertAll(*asteroidsData.asteroidsDataList())
             } catch(e: Exception) {

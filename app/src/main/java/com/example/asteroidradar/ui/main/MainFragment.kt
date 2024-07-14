@@ -3,8 +3,12 @@ package com.example.asteroidradar.ui.main
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,17 +16,39 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
-import com.example.asteroidradar.network_database.database.AsteroidDatabase
 import com.google.android.material.snackbar.Snackbar
 
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
 
+    private val menuProvider = object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.filtering, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            when (menuItem.itemId) {
+                R.id.filterNext7Days -> {
+                    viewModel.showNext7Days()
+                    return true
+                }
+                R.id.filterToday -> {
+                    viewModel.showToday()
+                    return true
+                }
+                R.id.filterAllAsteroids -> {
+                    viewModel.showAll()
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
     private val application by lazy { requireNotNull(this.activity).application }
-    private val dataSource by lazy { AsteroidDatabase.getDatabase(application).asteroidDatabaseDao }
     private val viewModel: MainViewModel by viewModels {
-        MainViewModel.Factory(dataSource, application)
+        MainViewModel.Factory(application)
     }
 
     override fun onCreateView(
@@ -32,6 +58,8 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner)
 
         viewModel.apodUrl.observe(viewLifecycleOwner) { url ->
             loadPicture(url)
@@ -84,5 +112,10 @@ class MainFragment : Fragment() {
             .placeholder(R.drawable.placeholder_picture_of_day)
             .error(R.drawable.baseline_broken_image_24)
             .into(imageView)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().removeMenuProvider(menuProvider)
     }
 }
