@@ -15,14 +15,14 @@ fun TextView.setAsteroidName(item: AsteroidData?) {
 @BindingAdapter("asteroidDate")
 fun TextView.setAsteroidDate(item: AsteroidData?) {
     item?.let {
-        text = dateMillis2String(item.date)
+        text = dateMillis2String(item.date, withTime = true)
     }
 }
 
 @BindingAdapter("closeApproachDate")
 fun TextView.setCloseApproachDate(item: AsteroidData?) {
     item?.let {
-        text = dateMillis2String(item.date)
+        text = dateMillis2String(item.date, withTime = true)
     }
 }
 
