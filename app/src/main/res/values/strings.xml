@@ -8,13 +8,16 @@
     <string name="estimated_diameter">Estimated diameter</string>
     <string name="relative_velocity">Relative velocity</string>
     <string name="distance_from_earth">Distance from earth</string>
+    <string name="au_unit_help_button">Au unit explanation button</string>
     <string name="au_explanation">The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometres (93 million miles).</string>
     <string name="ok">OK</string>
+    <string name="internet_not_ok">There is problem with Internet connection</string>
 
     <string name="au_unit">%.6f au</string>
     <string name="km_unit">%.6f km</string>
     <string name="kmps_unit">%.6f km/s</string>
 
+    <string name="hazardous_status">Hazardous status</string>
     <string name="hazardous_desc">Asteroid is hazardous</string>
     <string name="not_hazardous_desc">Asteroid is not hazardous</string>
 </resources>

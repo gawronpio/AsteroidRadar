@@ -33,8 +33,10 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
     private var _navigateToAsteroidDetail = MutableLiveData<Long?>()
     val navigateToAsteroidDetail: LiveData<Long?>
         get() = _navigateToAsteroidDetail
+    private val _httpError = MutableLiveData(false)
+    val httpError: LiveData<Boolean>
+        get() = _httpError
 
-    val asteroids = asteroidRepository.asteroids
     private var _asteroidsData = MutableLiveData<List<AsteroidData>>()
     val asteroidsData: LiveData<List<AsteroidData>>
         get() = _asteroidsData
@@ -42,9 +44,15 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
     init {
         viewModelScope.launch {
             getNewPicOfTheDayUrl()
-            asteroidRepository.refreshAsteroids()
+            if(asteroidRepository.refreshAsteroids()) {
+                _httpError.value = true
+            }
             _asteroidsData.postValue(databaseDao.getAll())
         }
+    }
+
+    fun onHttpErrorRead() {
+        _httpError.value = false
     }
 
     private suspend fun getNewPicOfTheDayUrl() {
@@ -55,6 +63,8 @@ class MainViewModel(databaseDao: AsteroidDatabaseDao, application: Application) 
             if(result.mediaType == "image") {
                 _apodUrl.postValue(result.url)
                 _apodTitle.postValue(result.explanation)
+                Timber.d("Apod url: ${result.url}")
+                Timber.d("Apod title: ${result.explanation}")
             } else {
                 _missingApod.postValue(true)
             }

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.asteroidradar.R
 import com.example.asteroidradar.databinding.FragmentMainBinding
 import com.example.asteroidradar.network_database.database.AsteroidDatabase
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainFragment : Fragment() {
@@ -60,7 +61,20 @@ class MainFragment : Fragment() {
             }
         }
 
+        viewModel.httpError.observe(viewLifecycleOwner) {
+            if(it) {
+                showHttpErrorInfo()
+                viewModel.onHttpErrorRead()
+            }
+        }
+
         return binding.root
+    }
+
+    private fun showHttpErrorInfo() {
+        Snackbar.make(binding.root, getString(R.string.internet_not_ok), Snackbar.LENGTH_INDEFINITE)
+            .setAction("OK") {}
+            .show()
     }
 
     private fun loadPicture(url: String) {

@@ -15,6 +15,9 @@
     <string name="km_unit">%.6f km</string>
     <string name="kmps_unit">%.6f km/s</string>
 
+    <string name="hazardous_status">Statsu zagrożenia</string>
     <string name="hazardous_desc">Asteroida może być niebezpieczna</string>
     <string name="not_hazardous_desc">Asteroida nie jest niebezpieczna</string>
+    <string name="au_unit_help_button">Przycisk z wyjaśnieniem jednostki au</string>
+    <string name="internet_not_ok">Wystąpił problem z połączeniem sieciowym</string>
 </resources>
